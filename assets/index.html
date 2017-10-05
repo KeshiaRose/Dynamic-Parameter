@@ -15,11 +15,11 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
     <!-- AddIn Library (this will be hosted on a CDN eventually) -->
-    <script src="tableau-addin-0.5.0.js"></script>
+    <script src="js/tableau-addin-0.5.0.js"></script>
 
     <!-- Our add-in's js & css -->
-    <script src="dropdown.js"></script>
-    <link rel="stylesheet" href="style.css">
+    <script src="js/dropdown.js"></script>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
@@ -92,8 +92,8 @@
         <div id="dropdown" class="form-inline" style="display:none;">
             <div class="form-group" style="width:100%;">
                 <select class="form-control" name="dropdown" id="dynamicparameter" onChange="updateParam(this.value)" style="width:calc(100% - 30px)"></select>
-                <img onClick="updateRelevant()" id="relimg" src="relevant.png" style="width:10px;overflow:hidden;cursor:pointer;" title="Toggle Relevant">
-                <img onClick="resetSettings()" src="clear-button.png" style="width:10px;overflow:hidden;cursor:pointer;" title="Reset Dynamic Parameter">
+                <img onClick="updateRelevant()" id="relimg" src="imgs/relevant.png" style="width:10px;overflow:hidden;cursor:pointer;" title="Toggle Relevant">
+                <img onClick="resetSettings()" src="imgs/clear-button.png" style="width:10px;overflow:hidden;cursor:pointer;" title="Reset Dynamic Parameter">
             </div>
         </div>
     </div>

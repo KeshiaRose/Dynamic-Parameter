@@ -270,7 +270,7 @@ function getParamData() {
     let rel = tableau.addIn.settings.get('dpRelevant');
     if (rel == 'false') {
         console.log('Getting All Values');
-        document.getElementById('relimg').src = "all.png";
+        document.getElementById('relimg').src = "imgs/all.png";
         dataSource.getUnderlyingDataAsync().then(dataTable => {
             fieldIndex = dataTable.columns.find(column => column.fieldName == dataField).index;
             let list = [];
@@ -292,7 +292,7 @@ function getParamData() {
         });
     } else {
         console.log('Getting Only Relevant Values');
-        document.getElementById('relimg').src = "relevant.png";
+        document.getElementById('relimg').src = "imgs/relevant.png";
         dataSheet.getSummaryDataAsync().then(dataTable => {
             let fieldIndex = dataTable.columns.find((column) => column.fieldName == dataField).index;
             let list = [];
@@ -345,12 +345,12 @@ function updateRelevant() {
     if (current == 'false') {
         tableau.addIn.settings.set('dpRelevant', 'true');
         tableau.addIn.settings.saveAsync();
-        document.getElementById('relimg').src = "relevant.png";
+        document.getElementById('relimg').src = "imgs/relevant.png";
         console.log('Switched to Only Relevant Values');
     } else {
         tableau.addIn.settings.set('dpRelevant', 'false');
         tableau.addIn.settings.saveAsync();
-        document.getElementById('relimg').src = "all.png";
+        document.getElementById('relimg').src = "imgs/all.png";
         console.log('Switched to All Values');
     }
     getParamData();
