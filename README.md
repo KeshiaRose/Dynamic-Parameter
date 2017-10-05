@@ -5,7 +5,7 @@ This Tableau add-in allows you to add dynamic parameter capabilities to a Tablea
 
 ### Download and install Tableau Desktop (with the Extensions API)
 
-Download and install the Extensions API version of Tableau Desktop from the [Tableau Extensions API Developer Preview](https://prerelease.tableau.com) site). Under **Resources**, click **Extensions API Software Downloads**. 
+Download and install the Extensions API version of Tableau Desktop from the [Tableau Extensions API Developer Preview](https://prerelease.tableau.com) site. Under **Resources**, click **Extensions API Software Downloads**. 
 
 ### Download and install the Dynamic Parameter manifest file
 
