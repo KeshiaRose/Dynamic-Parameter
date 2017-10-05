@@ -19,7 +19,7 @@ Download the Dynamic Parameter [manifest file](https://keshiarose.github.io/Dyna
 5.	Select an open input parameter for the add-in to affect
 
 Once the parameter is set it will look something like this:
-![Dynamic Parameter](https://raw.githubusercontent.com/KeshiaRose/Dynamic-Parameter/gh-pages/dp_preview.png)
+![Dynamic Parameter](https://raw.githubusercontent.com/KeshiaRose/Dynamic-Parameter/master/hosted/imgs/dp_preview.png)
 - The blue filter icon toggles if the parameter is affected by filters on the worksheet or not.
     - (Note: if you use the “only relevant values” option, your field must be present on the worksheet to work)
 - The red “x” clears the settings and you can start over.
