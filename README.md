@@ -14,7 +14,7 @@ Download the Dynamic Parameter [manifest file](https://keshiarose.github.io/Dyna
 # Using the Add-In
 1.	Drag in the add-in to your dashboard
 2.	Select the worksheet that holds the data source you want to base your parameter on
-3.	Select the data source that holds the field you want to base your parameter on
+3.	Select the data source that holds the field you want to base your parameter on (if only one data source present, will auto select)
 4.	Select the field you want to base your parameter on
 5.	Select an already existing open input parameter for the add-in to affect
 
