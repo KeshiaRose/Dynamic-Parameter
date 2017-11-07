@@ -16,7 +16,7 @@ Download the Dynamic Parameter [manifest file](https://keshiarose.github.io/Dyna
 2.	Select the worksheet that holds the data source you want to base your parameter on
 3.	Select the data source that holds the field you want to base your parameter on
 4.	Select the field you want to base your parameter on
-5.	Select an open input parameter for the add-in to affect
+5.	Select an already existing open input parameter for the add-in to affect
 
 Once the parameter is set it will look something like this:
 ![Dynamic Parameter](https://raw.githubusercontent.com/KeshiaRose/Dynamic-Parameter/master/hosted/imgs/dp_preview.png)
