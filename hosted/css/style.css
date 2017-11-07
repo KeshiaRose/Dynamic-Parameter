@@ -22,6 +22,8 @@ p {
 .step {
     background: #4ABEBD;
     color: #fff;
+    padding: 3px;
+    margin-bottom: 3px;
 }
 
 .warning {

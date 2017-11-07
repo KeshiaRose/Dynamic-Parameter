@@ -3,11 +3,11 @@ var dashboard, dataSheet, dataSource, dataField, selParam;
 $(document).ready(function() {
     //$("#initializeButton").click(() => {
     //document.getElementById('initializeButton').style.display = "none";
-    tableau.addIn.initializeAsync().then(() => {
+    tableau.extensions.initializeAsync().then(() => {
         // resetSettings();
-        console.log(tableau.addIn.settings.getAll())
-        dashboard = tableau.addIn.dashboardContent.dashboard
-        let wsset = tableau.addIn.settings.get('selWorksheet');
+        console.log(tableau.extensions.settings.getAll())
+        dashboard = tableau.extensions.dashboardContent.dashboard
+        let wsset = tableau.extensions.settings.get('selWorksheet');
         if (wsset) {
             testWorksheetSettings()
         } else {
@@ -20,11 +20,11 @@ $(document).ready(function() {
 // Tests if currently set Worksheet is still on dashboard
 function testWorksheetSettings() {
     console.log('Testing Worksheet Settings');
-    let wsset = tableau.addIn.settings.get('selWorksheet');
+    let wsset = tableau.extensions.settings.get('selWorksheet');
     if (wsset) {
         ws = dashboard.worksheets.find(ws => ws.name === wsset)
         if (ws) {
-            document.getElementById('showwsname').innerHTML = "Selected Worksheet: " + ws.name;
+            document.getElementById('showwsname').innerHTML = "Selected worksheet: " + ws.name;
             document.getElementById('showwsname').style.display = "block";
             dataSheet = ws;
             testDataSourceSettings();
@@ -40,7 +40,8 @@ function testWorksheetSettings() {
 function populateWorksheetList() {
     console.log('Populating Worksheet List');
     document.getElementById('loading').style.display = "none";
-    document.getElementById('wsselect').style.display = "inline";
+    document.getElementById('reset').style.display = "block";
+    document.getElementById('wsselect').style.display = "block";
     let options = "";
     let t = 0;
     for (ws of dashboard.worksheets) {
@@ -48,7 +49,7 @@ function populateWorksheetList() {
         t++
     }
     if (t == 0) {
-        document.getElementById('wsselector').innerHTML = "<option value='' disabled>No Worksheets Found</option>";
+        document.getElementById('wsselector').innerHTML = "<option value='' disabled>No worksheets found</option>";
         document.getElementById('wserror').innerHTML = "Error: You must have a worksheet on the dashboard.";
     } else {
         document.getElementById('wsselector').innerHTML = options;
@@ -61,10 +62,10 @@ function setWorksheet() {
     let wsname = document.getElementById('wsselector').value;
     if (wsname != '') {
         document.getElementById('wsselect').style.display = "none";
-        document.getElementById('showwsname').innerHTML = "Selected Worksheet: " + wsname;
+        document.getElementById('showwsname').innerHTML = "Selected worksheet: " + wsname;
         document.getElementById('showwsname').style.display = "block";
-        tableau.addIn.settings.set('selWorksheet', wsname);
-        tableau.addIn.settings.saveAsync();
+        tableau.extensions.settings.set('selWorksheet', wsname);
+        tableau.extensions.settings.saveAsync();
         dataSheet = dashboard.worksheets.find(sheet => sheet.name == wsname);
         populateDataSourceList();
     }
@@ -73,12 +74,12 @@ function setWorksheet() {
 // Tests if currently set Data Source is still on worksheet
 function testDataSourceSettings() {
     console.log('Testing Data Source Settings');
-    let dsset = tableau.addIn.settings.get('selDataSource');
+    let dsset = tableau.extensions.settings.get('selDataSource');
     if (dsset) {
         dataSheet.getDataSourcesAsync().then(data => {
             ds = data.find(ds => ds.name == dsset);
             if (ds) {
-                document.getElementById('showdsname').innerHTML = "Selected Data Source: " + ds.name;
+                document.getElementById('showdsname').innerHTML = "Selected data source: " + ds.name;
                 document.getElementById('showdsname').style.display = "block";
                 dataSource = ds;
                 testFieldSettings();
@@ -96,19 +97,20 @@ function testDataSourceSettings() {
 function populateDataSourceList() {
     console.log('Populating Data Source List');
     document.getElementById('loading').style.display = "none";
-    document.getElementById('showset').style.display = "inline";
+    document.getElementById('reset').style.display = "block";
+    document.getElementById('showset').style.display = "block";
     dataSheet.getDataSourcesAsync().then(data => {
         if (data.length == 1) {
             dsname = data[0].name
             ds = data.find(ds => ds.name == dsname);
             dataSource = ds;
-            tableau.addIn.settings.set('selDataSource', dsname);
-            tableau.addIn.settings.saveAsync();
-            document.getElementById('showdsname').innerHTML = "Selected Data Source: " + dsname;
+            tableau.extensions.settings.set('selDataSource', dsname);
+            tableau.extensions.settings.saveAsync();
+            document.getElementById('showdsname').innerHTML = "Only one data source found: " + dsname;
             document.getElementById('showdsname').style.display = "block";
             populateFieldList();
         } else {
-            document.getElementById('dsselect').style.display = "inline";
+            document.getElementById('dsselect').style.display = "block";
             let options = "";
             let t = 0;
             for (ds of data) {
@@ -116,7 +118,7 @@ function populateDataSourceList() {
                 t++
             }
             if (t == 0) {
-                document.getElementById('dsselector').innerHTML = "<option value='' disabled>No Data Sources Found</option>";
+                document.getElementById('dsselector').innerHTML = "<option value='' disabled>No data sources found</option>";
                 document.getElementById('dserror').innerHTML = "Error: You must have a data source in the worksheet.";
             } else {
                 document.getElementById('dsselector').innerHTML = options;
@@ -132,10 +134,10 @@ function setDataSource() {
     if (dsname != '') {
         dataSheet.getDataSourcesAsync().then(data => {
             ds = data.find(ds => ds.name == dsname);
-            tableau.addIn.settings.set('selDataSource', dsname);
-            tableau.addIn.settings.saveAsync();
+            tableau.extensions.settings.set('selDataSource', dsname);
+            tableau.extensions.settings.saveAsync();
             dataSource = ds;
-            document.getElementById('showdsname').innerHTML = "Selected Data Source: " + dsname;
+            document.getElementById('showdsname').innerHTML = "Selected data source: " + dsname;
             document.getElementById('showdsname').style.display = "block";
             document.getElementById('dsselect').style.display = "none";
             populateFieldList();
@@ -146,7 +148,7 @@ function setDataSource() {
 // Tests if currently set Field to pull domain from exists
 function testFieldSettings() {
     console.log('Testing Field Settings');
-    let fset = tableau.addIn.settings.get('selField');
+    let fset = tableau.extensions.settings.get('selField');
     if (fset) {
         dataSource.getUnderlyingDataAsync().then(dataTable => {
             if (dataTable.columns.find((column) => column.fieldName == fset)) {
@@ -165,8 +167,9 @@ function testFieldSettings() {
 function populateFieldList() {
     console.log('Populating Field List');
     document.getElementById('loading').style.display = "none";
-    document.getElementById('showset').style.display = "inline";
-    document.getElementById('fselect').style.display = "inline";
+    document.getElementById('reset').style.display = "block";
+    document.getElementById('showset').style.display = "block";
+    document.getElementById('fselect').style.display = "block";
     dataSource.getUnderlyingDataAsync().then(columns => {
         let options = "";
         let t = 0;
@@ -175,7 +178,7 @@ function populateFieldList() {
             t++
         }
         if (t == 0) {
-            document.getElementById('fselector').innerHTML = "<option value='' disabled>No Fields Found</option>";
+            document.getElementById('fselector').innerHTML = "<option value='' disabled>No fields found</option>";
             document.getElementById('ferror').innerHTML = "Error: You must have a field on the DataViz worksheet.";
         } else {
             document.getElementById('fselector').innerHTML = options;
@@ -188,9 +191,9 @@ function setField() {
     console.log('Setting Field');
     let fname = document.getElementById('fselector').value;
     if (fname != '') {
-        tableau.addIn.settings.set('selField', fname);
-        tableau.addIn.settings.saveAsync();
-        document.getElementById('showfname').innerHTML = "Selected Field: " + fname;
+        tableau.extensions.settings.set('selField', fname);
+        tableau.extensions.settings.saveAsync();
+        document.getElementById('showfname').innerHTML = "Selected field: " + fname;
         document.getElementById('showfname').style.display = "block";
         document.getElementById('fselect').style.display = "none";
         dataField = fname;
@@ -202,9 +205,9 @@ function setField() {
 // Tests if currently set Parameter exists and accepts all values
 function testParamSettings() {
     console.log('Testing Parameter Settings');
-    let pset = tableau.addIn.settings.get('selParam');
+    let pset = tableau.extensions.settings.get('selParam');
     if (pset) {
-        tableau.addIn.dashboardContent.dashboard.getParametersAsync().then(params => {
+        tableau.extensions.dashboardContent.dashboard.getParametersAsync().then(params => {
             let testParam = params.find(param => param.name === pset)
             if (testParam) {
                 if (testParam.allowableValues.type == "all") {
@@ -227,9 +230,10 @@ function testParamSettings() {
 function populateParamList() {
     console.log('Populating Parameter List');
     document.getElementById('loading').style.display = "none";
-    document.getElementById('showset').style.display = "inline";
-    document.getElementById('pselect').style.display = "inline";
-    tableau.addIn.dashboardContent.dashboard.getParametersAsync().then(params => {
+    document.getElementById('reset').style.display = "block";
+    document.getElementById('showset').style.display = "block";
+    document.getElementById('pselect').style.display = "block";
+    tableau.extensions.dashboardContent.dashboard.getParametersAsync().then(params => {
         let options = "";
         let t = 0;
         for (p of params) {
@@ -239,7 +243,7 @@ function populateParamList() {
             }
         }
         if (t == 0) {
-            document.getElementById('pselector').innerHTML = "<option value='' disabled>No Parameters Found</option>";
+            document.getElementById('pselector').innerHTML = "<option value='' disabled>No parameters found</option>";
             document.getElementById('perror').innerHTML = "Error: You must have a parameter with an open input.";
         } else {
             document.getElementById('pselector').innerHTML = options;
@@ -252,13 +256,14 @@ function setParam() {
     console.log('Setting Parameter');
     let pname = document.getElementById('pselector').value;
     if (pname != '') {
-        tableau.addIn.dashboardContent.dashboard.getParametersAsync().then(params => {
+        tableau.extensions.dashboardContent.dashboard.getParametersAsync().then(params => {
             selParam = params.find(param => param.name === pname);
-            tableau.addIn.settings.set('selParam', pname);
-            tableau.addIn.settings.set('dpRelevant', 'false');
-            tableau.addIn.settings.saveAsync();
+            tableau.extensions.settings.set('selParam', pname);
+            tableau.extensions.settings.set('dpRelevant', 'false');
+            tableau.extensions.settings.saveAsync();
             document.getElementById('pselect').style.display = "none";
             document.getElementById('showset').style.display = "none";
+            document.getElementById('reset').style.display = "none";
             getParamData();
         });
     }
@@ -267,7 +272,7 @@ function setParam() {
 // Gets the values from the selected field and populates the Dynamic Parameter
 function getParamData() {
     console.log('Getting Parameter Data');
-    let rel = tableau.addIn.settings.get('dpRelevant');
+    let rel = tableau.extensions.settings.get('dpRelevant');
     if (rel == 'false') {
         console.log('Getting All Values');
         document.getElementById('relimg').src = "imgs/all.png";
@@ -288,7 +293,7 @@ function getParamData() {
             document.getElementById('loading').style.display = "none";
             document.getElementById('dynamicparameter').innerHTML = options;
             document.getElementById('dynamicparameter').value = selParam.currentValue.value;
-            document.getElementById('dropdown').style.display = "inline";
+            document.getElementById('dropdown').style.display = "block";
         });
     } else {
         console.log('Getting Only Relevant Values');
@@ -310,7 +315,7 @@ function getParamData() {
             document.getElementById('loading').style.display = "none";
             document.getElementById('dynamicparameter').innerHTML = options;
             document.getElementById('dynamicparameter').value = selParam.currentValue.value;
-            document.getElementById('dropdown').style.display = "inline";
+            document.getElementById('dropdown').style.display = "block";
         });
     }
 }
@@ -319,7 +324,7 @@ function getParamData() {
 function updateParam(arg) {
     console.log('Updating Parameter');
     selParam.changeValueAsync(arg);
-    let rel = tableau.addIn.settings.get('dpRelevant');
+    let rel = tableau.extensions.settings.get('dpRelevant');
     if (rel == 'true') {
         getParamData();
     }
@@ -328,28 +333,38 @@ function updateParam(arg) {
 // Resets all settings
 function resetSettings() {
     console.log('Reseting Settings');
-    tableau.addIn.settings.erase('selWorksheet');
-    tableau.addIn.settings.erase('selDataSource');
-    tableau.addIn.settings.erase('selField');
-    tableau.addIn.settings.erase('selParameter');
-    tableau.addIn.settings.erase('dpRelevant');
+    tableau.extensions.settings.erase('selWorksheet');
+    tableau.extensions.settings.erase('selDataSource');
+    tableau.extensions.settings.erase('selField');
+    tableau.extensions.settings.erase('selParameter');
+    tableau.extensions.settings.erase('dpRelevant');
     document.getElementById('dropdown').style.display = "none";
-    tableau.addIn.settings.saveAsync().then(result => {
+    tableau.extensions.settings.saveAsync().then(result => {
+        // Reload extension
+        document.getElementById('showwsname').style.display = "none";
+        document.getElementById('showdsname').style.display = "none";
+        document.getElementById('showfname').style.display = "none";
+        document.getElementById('wsselect').style.display = "none";
+        document.getElementById('dsselect').style.display = "none";
+        document.getElementById('nods').style.display = "none";
+        document.getElementById('fselect').style.display = "none";
+        document.getElementById('pselect').style.display = "none";
+        document.getElementById('dropdown').style.display = "none";
         populateWorksheetList();
     });
 }
 
 // Toggles if Dynamic Parameter is affected by filters or not
 function updateRelevant() {
-    current = tableau.addIn.settings.get('dpRelevant');
+    current = tableau.extensions.settings.get('dpRelevant');
     if (current == 'false') {
-        tableau.addIn.settings.set('dpRelevant', 'true');
-        tableau.addIn.settings.saveAsync();
+        tableau.extensions.settings.set('dpRelevant', 'true');
+        tableau.extensions.settings.saveAsync();
         document.getElementById('relimg').src = "imgs/relevant.png";
         console.log('Switched to Only Relevant Values');
     } else {
-        tableau.addIn.settings.set('dpRelevant', 'false');
-        tableau.addIn.settings.saveAsync();
+        tableau.extensions.settings.set('dpRelevant', 'false');
+        tableau.extensions.settings.saveAsync();
         document.getElementById('relimg').src = "imgs/all.png";
         console.log('Switched to All Values');
     }

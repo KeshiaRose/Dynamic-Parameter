@@ -14,26 +14,16 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-    <!-- AddIn Library (this will be hosted on a CDN eventually) -->
-    <script src="js/tableau-addin-0.5.0.js"></script>
+    <!-- Extension Library (this will be hosted on a CDN eventually) -->
+    <script src="js/tableau-extensions-0.6.1.js"></script>
 
-    <!-- Our add-in's js & css -->
+    <!-- Dynamic Parameter js & css -->
     <script src="js/dropdown.js"></script>
     <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
     <div class="container-fluid" style="padding:0px;">
-        <!--
-            <button id="initializeButton" class="btn btn-teal">Initialize</button>
-			-->
-
-        <!-- <div id="dataviz" style="display:none;font-size:1.2em;">
-            <p class="warning"><b>Warning</b></p>
-            A worksheet called "DataViz" must be on the dashboard that contains the field you want to use to populate the parameter. You can float this viz and set it to 0 px width and height s it doesn't show. This will change once we are able to query the data
-            source for the parameter values drectly.
-        </div> -->
-
         <div id="loading">
             Loading...
         </div>
@@ -45,7 +35,7 @@
         </div>
 
         <div id="wsselect" class="form-inline" style="display:none;">
-            <p class="step"><b>Step 1:</b> Select the worksheet that has the data source you would like to use for the parameter source.</p>
+            <div class="step"><span><b>Step 1:</b> Select which worksheet that has the data source you would like to use to populate the parameter.</span></div>
             <div class="form-group">
                 <select class="form-control" id="wsselector">
                         <option value='' disabled>Loading worksheets...</option>
@@ -56,7 +46,7 @@
         </div>
 
         <div id="dsselect" class="form-inline" style="display:none;">
-            <p class="step"><b>Step 2:</b> Select the data source that has the field you would like to use for the parameter source.</p>
+            <div class="step"><span><b>Step 2:</b> Select which data source that has the field you would like to use to populate the parameter.</span></div>
             <div class="form-group">
                 <select class="form-control" id="dsselector">
                         <option value='' disabled>Loading data sources...</option>
@@ -68,7 +58,7 @@
         <p id="nods" class="warning" style="display:none;">You must have a data source on your worksheet. Please add a data source and reload the Add-In.</p>
 
         <div id="fselect" class="form-inline" style="display:none;">
-            <p class="step"><b>Step 3:</b> Select the field to populate the parameter from.</p>
+            <div class="step"><span><b>Step 3:</b> Select which field to populate the parameter from.</span></div>
             <div class="form-group">
                 <select class="form-control" id="fselector">
                         <option value='' disabled>Loading fields...</option>
@@ -79,7 +69,7 @@
         </div>
 
         <div id="pselect" class="form-inline" style="display:none;">
-            <p class="step"><b>Step 4:</b> Select the parameter to change. Parameter must be an open input.</p>
+            <div class="step"><span><b>Step 4:</b> Select an existing parameter to change. Parameter must allow all inputs.</span></div>
             <div class="form-group">
                 <select class="form-control" id="pselector">
                         <option value='' disabled>Loading parameters...</option>
@@ -87,6 +77,10 @@
                 <button type="submit" id="paramselected" class="btn btn-teal" onClick="setParam()">Set Parameter</button>
                 <div id="perror"> </div>
             </div>
+        </div>
+
+        <div id="reset" style="padding-top:10px;display:none;">
+            <button type="submit" id="resetbutton" class="btn btn-danger btn-sm" onClick="resetSettings()">Clear Settings</button>
         </div>
 
         <div id="dropdown" class="form-inline" style="display:none;">
