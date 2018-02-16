@@ -1,7 +1,8 @@
-# Dynamic Parameter Extension
-This Tableau add-in allows you to add dynamic parameter capabilities to a Tableau dashboard.
 
-# Installing the Add-In
+# Dynamic Parameter Extension
+This extension allows you to add dynamic parameter capabilities to a Tableau dashboard.
+
+# Installing the Extension
 
 ### Download and install Tableau Desktop (with the Extensions API)
 
@@ -9,14 +10,16 @@ Download and install the Extensions API version of Tableau Desktop from the [Tab
 
 ### Download and install the Dynamic Parameter manifest file
 
-Download the Dynamic Parameter [manifest file](https://keshiarose.github.io/Dynamic-Parameter/DynamicParameter.trex). To make the extension available in Tableau, you need to place the manifest file in an `Extensions` folder in the `My Tableau Repository (Beta)` folder (for example, `c:\User\Name\Documents\My Tableau Repository (Beta)\Extensions`). The extension will appear on a dashboard sheet, under **Extensions**. 
+Download the Dynamic Parameter [manifest file](https://keshiarose.github.io/Dynamic-Parameter/DynamicParameter.trex). 
 
-# Using the Add-In
-1.	Drag in the add-in to your dashboard
-2.	Select the worksheet that holds the data source you want to base your parameter on
-3.	Select the data source that holds the field you want to base your parameter on (if only one data source present, will auto select)
-4.	Select the field you want to base your parameter on
-5.	Select an already existing open input parameter for the add-in to affect
+# Using the Extension
+1.	Create an open input (All) parameter
+2.	Drag in a new Extension object
+3.	Find the manifest (.trex) file you downloaded above
+4.	Select the worksheet that holds the data source you want to base your parameter on
+5.	Select the data source that holds the field you want to base your parameter on (if only one data source present, the extension will auto select it)
+6.	Select the field you want to base your parameter on
+7.	Select the parameter you created above for the extension to manipulate
 
 Once the parameter is set it will look something like this:
 ![Dynamic Parameter](https://raw.githubusercontent.com/KeshiaRose/Dynamic-Parameter/master/hosted/imgs/dp_preview.png)
