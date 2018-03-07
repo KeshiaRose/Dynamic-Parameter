@@ -134,12 +134,13 @@ function populateDataSourceList() {
     console.log('Populating data source list.');
     document.getElementById('divdatasourceselector').style.display = "flex";
     if (dslist.length == 1) {
-        tableau.extensions.settings.set('selDataSource', dslist[0]);
+        tableau.extensions.settings.set('selDataSource', dslist[0].name);
         tableau.extensions.settings.saveAsync();
         document.getElementById('divdatasourceselector').style.display = "none";
         document.getElementById('divdatasourceselected').style.display = "flex";
-        document.getElementById('datasource').innerHTML = dslist[0];
-        dataSource = dslist[0];
+        document.getElementById('datasource').innerHTML = dslist[0].name;
+        dataSource = dslist[0].name;
+        testFieldSettings();
     } else {
         let options = "";
         let t = 0;
