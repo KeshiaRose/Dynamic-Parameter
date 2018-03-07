@@ -139,7 +139,7 @@ function populateDataSourceList() {
         document.getElementById('divdatasourceselector').style.display = "none";
         document.getElementById('divdatasourceselected').style.display = "flex";
         document.getElementById('datasource').innerHTML = dslist[0].name;
-        dataSource = dslist[0].name;
+        dataSource = dslist[0];
         testFieldSettings();
     } else {
         let options = "";
