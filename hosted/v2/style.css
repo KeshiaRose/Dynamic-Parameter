@@ -1,0 +1,97 @@
+html,
+body {
+    /* background: #F4F4F4; */
+    font-family: 'Segoe UI', Verdana, sans-serif;
+}
+
+h1,
+h2,
+h3 {
+    font-family: 'Segoe UI Light', Verdana, sans-serif
+}
+
+.left {
+    background: #0D1143;
+    height: 100%;
+    text-align: right;
+    padding-top: 20px;
+}
+
+.right p {
+    background: #F4F4F4;
+    margin: 0px;
+    padding-top: 10px;
+}
+
+.header {
+    height: 85px;
+}
+
+.title {
+    padding-top: 50px;
+}
+
+.step {
+    height: 80px;
+}
+
+.selector {
+    width: 250px !important;
+}
+
+.circle {
+    background: #fff;
+    border-radius: 0.8em;
+    -moz-border-radius: 0.8em;
+    -webkit-border-radius: 0.8em;
+    color: #0D1143;
+    display: inline-block;
+    font-weight: bold;
+    font-size: 1.7em;
+    line-height: 1.6em;
+    margin-right: 5px;
+    text-align: center;
+    width: 1.6em;
+}
+
+.done p {
+    color: #3F3E3E;
+    margin-top: 20px;
+}
+
+.done svg {
+    color: #28A745 !important;
+    font-size: 2em;
+    margin: 5px 10px;
+}
+
+.clear svg {
+    color: #DD0404 !important;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.submit {
+    text-align: center;
+    padding-top: 15px;
+}
+
+.footer {
+    height: 95px;
+}
+
+.config {
+    width: 20px;
+    padding: 2px;
+    color: darkgray;
+    cursor: pointer;
+}
+
+#dynamicparameter {
+    width: 100%;
+}
+
+.error {
+    color: red;
+    font-weight: bold;
+}

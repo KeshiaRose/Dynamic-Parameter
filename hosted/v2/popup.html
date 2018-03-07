@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dynamic Parameter Configuration</title>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+
+    <script src="tableau-extensions-0.10.0.js"></script>
+
+    <script src="popup.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container-fluid" style="background:#F4F4F4;width:600px;height:500px;">
+        <!-- Header -->
+        <div class="row header">
+            <div class="col-sm-2 left"></div>
+            <div class="col-sm-10 title">
+                <h3>Dynamic Parameter Configuration</h3>
+            </div>
+        </div>
+
+        <!-- Parameter dropdown -->
+        <div class="row step" id="divparamselector">
+            <div class="col-sm-2 left">
+                <span class="circle">1</span>
+            </div>
+            <div class="col-sm-10 right">
+                <p>Select an existing parameter to manipulate:</p>
+                <div class="error" id="perror"> </div>
+                <form class="form-inline">
+                    <div>
+                        <select class="form-control form-control-sm selector" id="paramselect">
+                        </select>
+                        <input class="btn btn-success btn-sm" type="button" id="parameterset" value="Set" onclick="setParam()" disabled>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Parameter selected -->
+        <div class="row step done" id="divparamselected" style="display:none;">
+            <div class="col-sm-2 left">
+                <span class="fas fa-check"></span>
+            </div>
+            <div class="col-sm-10 right">
+                <p><i>The parameter <b id="parameter">Parameter 1</b> has been selected</i></p>
+            </div>
+        </div>
+
+        <!-- Data source dropdown -->
+        <div class="row step" id="divdatasourceselector">
+            <div class="col-sm-2 left">
+                <span class="circle">2</span>
+            </div>
+            <div class="col-sm-10 right">
+                <p>Select a data source:</p>
+                <form class="form-inline">
+                    <div>
+                        <select class="form-control form-control-sm selector" id="datasourceselect" disabled>
+                        </select>
+                        <input class="btn btn-success btn-sm" type="button" id="datasourceset" value="Set" onclick="setDataSource()" disabled>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Data source selected -->
+        <div class="row step done" id="divdatasourceselected" style="display:none;">
+            <div class="col-sm-2 left">
+                <span class="fas fa-check"></span>
+            </div>
+            <div class="col-sm-10 right">
+                <p><i>The data source <b id="datasource">Data Source 1</b> has been selected</i></p>
+            </div>
+        </div>
+
+        <!-- Field dropdown -->
+        <div class="row step" id="divfieldselector">
+            <div class="col-sm-2 left">
+                <span class="circle">3</span>
+            </div>
+            <div class="col-sm-10 right">
+                <p>Select which field to use to populate the dynamic parameter:</p>
+                <form class="form-inline">
+                    <div>
+                        <select class="form-control form-control-sm selector" id="fieldselect" disabled>
+                        </select>
+                        <input class="btn btn-success btn-sm" type="button" id="fieldset" value="Set" onclick="setField()" disabled>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Field selected -->
+        <div class="row step done" id="divfieldselected" style="display:none;">
+            <div class="col-sm-2 left">
+                <span class="fas fa-check"></span>
+            </div>
+            <div class="col-sm-10 right">
+                <p><i>The field <b id="field">State</b> has been selected</i></p>
+            </div>
+        </div>
+
+        <!-- Worksheet check -->
+        <div class="row step" id="divwsselector">
+            <div class="col-sm-2 left">
+            </div>
+            <div class="col-sm-10 right">
+                <form class="form-inline">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="relcheck" onclick="toggleWS()">
+                        <label class="form-check-label" for="relCheck">Make parameter only use relative values</label>
+                    </div>
+                    <div id="relselect" style="display:none;">
+                        <p>Select which worksheets filters to tie the parameter to:</p>
+                        <select class="form-control form-control-sm selector" id="wsselect">
+                            <option value="field 1">Sheet 1</option>
+                            <option value="field 2">Sheet 2</option>
+                        </select>
+                        <input class="btn btn-success btn-sm" type="button" id="wsset" value="Set" onclick="setWS()">
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Worksheet selected -->
+        <div class="row step done" id="divwsselected" style="display:none;">
+            <div class="col-sm-2 left">
+                <span class="fas fa-check"></span>
+            </div>
+            <div class="col-sm-10 right clear">
+                <p><i>The worksheet <b id="worksheet">State</b> has been selected</i> <i class="fas fa-times" onclick="clearWS()"></i></p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="row footer">
+            <div class="col-sm-2 left"></div>
+            <div class="col-sm-10 right submit">
+                <button class="btn btn-success" type="button" id="submit" onclick="submit()" disabled>Add dynamic parameter</button>
+                <button class="btn btn-secondary" type="button" onclick="clearSettings()">Clear all settings</button>
+                <p>
+                    <a href="https://keshiarose.github.io/Dynamic-Parameter/" target="_blank">
+                        <i>How do I use this thing?</i>
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
