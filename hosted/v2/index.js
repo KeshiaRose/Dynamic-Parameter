@@ -121,5 +121,5 @@ function getParamData() {
 function updateParam(arg) {
     console.log('Updating parameter.');
     parameter.changeValueAsync(arg);
-    getParamData();
+    //getParamData();
 }
