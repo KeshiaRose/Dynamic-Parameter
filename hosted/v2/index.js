@@ -16,16 +16,12 @@ $(document).ready(function() {
 // Pops open the configure page
 function configure() {
     // const popupUrl = `${window.location.origin}/extensions/newdynparam/popup.html`
-    const popupUrl = 'https://keshiarose.github.io/Dynamic-Parameter/hosted/v2/popup.html';
+    const popupUrl = 'http://localhost/extensions/newdynparam/popup.html';
     let payload = "";
     tableau.extensions.ui.displayDialogAsync(popupUrl, payload, { height: 600, width: 500 }).then((closePayload) => {
         console.log("Dialog was closed.");
         console.log(closePayload);
         findDataSource();
-        if (tableau.extensions.settings.get('dpRelevant') == 'true') {
-            let dataSheet = dashboard.worksheets.find(ws => ws.name == tableau.extensions.settings.get('selWorksheet'));
-            let unregisterHandlerFunction = dataSheet.addEventListener(tableau.TableauEventType.FilterChanged, getParamData);
-        }
     }).catch((error) => {
         switch (error.errorCode) {
             case tableau.ErrorCodes.DialogClosedByUser:
@@ -61,15 +57,23 @@ function findDataSource() {
 function findParameter() {
     tableau.extensions.dashboardContent.dashboard.getParametersAsync().then(params => {
         parameter = params.find(param => param.name === tableau.extensions.settings.get('selParam'));
-        getParamData();
+        wsEvent();
     });
+}
+
+function wsEvent() {
+    if (tableau.extensions.settings.get('dpRelevant') == 'true') {
+        let dataSheet = dashboard.worksheets.find(ws => ws.name == tableau.extensions.settings.get('selWorksheet'));
+        let unregisterHandlerFunction = dataSheet.addEventListener(tableau.TableauEventType.FilterChanged, getParamData);
+    }
+    getParamData();
 }
 
 // Gets the values from the selected field and populates the Dynamic Parameter
 function getParamData() {
+    console.log('Populating parameter.');
     let dataField = tableau.extensions.settings.get('selField');
     let rel = tableau.extensions.settings.get('dpRelevant');
-    console.log(rel)
     if (rel == 'false') {
         console.log('Getting all dynamic parameter values.');
         dataSource.getUnderlyingDataAsync().then(dataTable => {
@@ -119,10 +123,3 @@ function updateParam(arg) {
     parameter.changeValueAsync(arg);
     getParamData();
 }
-
-// Parameter & field data type validation: added, but it seems that all fields return as having "string" data types
-// Validate that worksheet has selected data source on it
-
-// Errors:
-// What if parameter, data source, field no longer exists
-// What if set parameter data type changes?
