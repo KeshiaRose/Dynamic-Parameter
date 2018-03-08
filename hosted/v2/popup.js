@@ -62,7 +62,8 @@ function populateParamList() {
         }
         if (t == 0) {
             document.getElementById('paramselect').innerHTML = "<option value='' disabled>No parameters found</option>";
-            document.getElementById('perror').innerHTML = "Error: You must have a parameter with an open input.";
+            document.getElementById('perror').style.display = 'flex';
+            document.getElementById('divparamselector').style.display = 'none';
         } else {
             document.getElementById('paramselect').innerHTML = options;
             document.getElementById('parameterset').disabled = false;
