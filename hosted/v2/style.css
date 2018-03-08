@@ -95,4 +95,5 @@ h3 {
 .error {
     color: red;
     font-weight: bold;
+    line-height:80px;
 }
