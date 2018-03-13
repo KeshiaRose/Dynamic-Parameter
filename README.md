@@ -1,4 +1,3 @@
-
 # Dynamic Parameter Extension
 This extension allows you to add dynamic parameter capabilities to a Tableau dashboard.
 
@@ -13,16 +12,11 @@ Download and install the Extensions API version of Tableau Desktop from the [Tab
 Download the Dynamic Parameter [manifest file](https://keshiarose.github.io/Dynamic-Parameter/DynamicParameter.trex). 
 
 # Using the Extension
-1.	Create an open input (All) parameter
-2.	Drag in a new Extension object
+1.	Create an open input (All) parameter with a data type matching the field you want to use to populate it
+2.	Drag in a new Extension object to your dashboard
 3.	Find the manifest (.trex) file you downloaded above
-4.	Select the worksheet that holds the data source you want to base your parameter on
+4.	Select the parameter you created above for the extension to manipulate
 5.	Select the data source that holds the field you want to base your parameter on (if only one data source present, the extension will auto select it)
 6.	Select the field you want to base your parameter on
-7.	Select the parameter you created above for the extension to manipulate
-
-Once the parameter is set it will look something like this:
-![Dynamic Parameter](https://raw.githubusercontent.com/KeshiaRose/Dynamic-Parameter/master/hosted/imgs/dp_preview.png)
-- The blue filter icon toggles if the parameter is affected by filters on the worksheet or not.
-    - (Note: if you use the “only relevant values” option, your field must be present on the worksheet to work)
-- The red “x” clears the settings and you can start over.
+7.	Optional: If you want your parameter to only contain relevant values, check the box and select the worksheet that has the filters you want to affect the dynamic parameter
+8.	Click 'Add dynamic parameter'
