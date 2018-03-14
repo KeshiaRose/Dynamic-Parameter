@@ -5,7 +5,12 @@ $(document).ready(function() {
         console.log(tableau.extensions.settings.getAll());
         dashboard = tableau.extensions.dashboardContent.dashboard;
         pset = tableau.extensions.settings.get('selParam');
-        document.getElementById('bg').value = tableau.extensions.settings.get('bg');
+        bg = tableau.extensions.settings.get('bg');
+        if (bg) {
+            document.getElementById('bg').value = tableau.extensions.settings.get('bg');
+        } else {
+            document.getElementById('bg').value = "#ffffff";
+        }
         populateWS();
         if (pset) {
             console.log('Parameter setting found for ' + pset + ".");
