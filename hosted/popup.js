@@ -5,6 +5,7 @@ $(document).ready(function() {
         console.log(tableau.extensions.settings.getAll());
         dashboard = tableau.extensions.dashboardContent.dashboard;
         pset = tableau.extensions.settings.get('selParam');
+        document.getElementById('bg').value = tableau.extensions.settings.get('bg');
         populateWS();
         if (pset) {
             console.log('Parameter setting found for ' + pset + ".");
@@ -13,7 +14,7 @@ $(document).ready(function() {
             console.log('No parameter setting found.');
             tableau.extensions.settings.set('configured', 'false');
             tableau.extensions.settings.set('dpRelevant', 'false');
-            tableau.extensions.settings.saveAsync();
+            // tableau.extensions.settings.saveAsync();
             populateParamList();
         }
         if (tableau.extensions.settings.get('configured') == 'true') {
@@ -78,9 +79,9 @@ function setParam() {
     if (pname != '') {
         pdatatype = document.getElementById('paramselect').dataset.type;
         tableau.extensions.settings.set('selParam', pname);
-        tableau.extensions.settings.saveAsync().then(result => {
-            console.log("Set selParam = " + tableau.extensions.settings.get('selParam'));
-        });
+        // tableau.extensions.settings.saveAsync().then(result => {
+        //     console.log("Set selParam = " + tableau.extensions.settings.get('selParam'));
+        // });
         document.getElementById('divparamselector').style.display = "none";
         document.getElementById('divparamselected').style.display = "flex";
         document.getElementById('parameter').innerHTML = pname;
@@ -136,7 +137,7 @@ function populateDataSourceList() {
     document.getElementById('divdatasourceselector').style.display = "flex";
     if (dslist.length == 1) {
         tableau.extensions.settings.set('selDataSource', dslist[0].name);
-        tableau.extensions.settings.saveAsync();
+        // tableau.extensions.settings.saveAsync();
         document.getElementById('divdatasourceselector').style.display = "none";
         document.getElementById('divdatasourceselected').style.display = "flex";
         document.getElementById('datasource').innerHTML = dslist[0].name;
@@ -166,9 +167,9 @@ function setDataSource() {
     console.log('Setting data source to ' + dsname + '.');
     if (dsname != '') {
         tableau.extensions.settings.set('selDataSource', dsname);
-        tableau.extensions.settings.saveAsync().then(result => {
-            console.log("Set selDataSource = " + tableau.extensions.settings.get('selDataSource'));
-        });
+        // tableau.extensions.settings.saveAsync().then(result => {
+        //     console.log("Set selDataSource = " + tableau.extensions.settings.get('selDataSource'));
+        // });
         dataSource = dslist[dsnames.indexOf(dsname)];
         console.log(dataSource);
         document.getElementById('divdatasourceselector').style.display = "none";
@@ -232,9 +233,9 @@ function setField() {
     console.log('Setting field to ' + fname + '.');
     if (fname != '') {
         tableau.extensions.settings.set('selField', fname);
-        tableau.extensions.settings.saveAsync().then(result => {
-            console.log("Set selField = " + tableau.extensions.settings.get('selField'));
-        });
+        // tableau.extensions.settings.saveAsync().then(result => {
+        //     console.log("Set selField = " + tableau.extensions.settings.get('selField'));
+        // });
         document.getElementById('divfieldselector').style.display = "none";
         document.getElementById('divfieldselected').style.display = "flex";
         document.getElementById('field').innerHTML = fname;
@@ -286,10 +287,10 @@ function setWS() {
     if (wsname != '') {
         tableau.extensions.settings.set('selWorksheet', wsname);
         tableau.extensions.settings.set('dpRelevant', 'true');
-        tableau.extensions.settings.saveAsync().then(result => {
-            console.log("Set selWorksheet = " + tableau.extensions.settings.get('selWorksheet'));
-            console.log("Set dpRelevant = " + tableau.extensions.settings.get('dpRelevant'));
-        });
+        // tableau.extensions.settings.saveAsync().then(result => {
+        //     console.log("Set selWorksheet = " + tableau.extensions.settings.get('selWorksheet'));
+        //     console.log("Set dpRelevant = " + tableau.extensions.settings.get('dpRelevant'));
+        // });
         document.getElementById('divwsselector').style.display = "none";
         document.getElementById('divwsselected').style.display = "flex";
         document.getElementById('worksheet').innerHTML = wsname;
@@ -299,16 +300,17 @@ function setWS() {
 function clearWS() {
     tableau.extensions.settings.set('dpRelevant', 'false');
     tableau.extensions.settings.erase('selWorksheet');
-    tableau.extensions.settings.saveAsync().then(result => {
-        console.log("Set dpRelevant = " + tableau.extensions.settings.get('dpRelevant'));
-        console.log("Erased selWorksheet");
-    });
+    // tableau.extensions.settings.saveAsync().then(result => {
+    //     console.log("Set dpRelevant = " + tableau.extensions.settings.get('dpRelevant'));
+    //     console.log("Erased selWorksheet");
+    // });
     document.getElementById('divwsselector').style.display = "flex";
     document.getElementById('divwsselected').style.display = "none";
 }
 
 function submit() {
     tableau.extensions.settings.set('configured', 'true');
+    tableau.extensions.settings.set('bg', document.getElementById('bg').value);
     tableau.extensions.settings.saveAsync().then(result => {
         tableau.extensions.ui.closeDialog(dataSource.name);
     });
@@ -320,6 +322,7 @@ function clearSettings() {
     tableau.extensions.settings.erase('selDataSource');
     tableau.extensions.settings.erase('selField');
     tableau.extensions.settings.erase('selParam');
+    tableau.extensions.settings.erase('bg');
     tableau.extensions.settings.set('configured', 'false');
     tableau.extensions.settings.set('dpRelevant', 'false');
     tableau.extensions.settings.saveAsync();

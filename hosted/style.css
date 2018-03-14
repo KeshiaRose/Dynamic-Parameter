@@ -81,6 +81,10 @@ h3 {
     height: calc(100% - 405px);
 }
 
+.footer .left {
+    padding-top: 0px;
+}
+
 .config {
     width: 20px;
     padding: 2px;
@@ -95,5 +99,17 @@ h3 {
 .error {
     color: red;
     font-weight: bold;
-    line-height:80px;
+    line-height: 80px;
+}
+
+#bg {
+    padding: 0px;
+    border: 0px;
+    background: #0D1143;
+    cursor: pointer;
+}
+
+.bg {
+    color: #fff;
+    text-align: center;
 }
