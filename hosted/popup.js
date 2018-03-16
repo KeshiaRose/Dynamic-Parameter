@@ -213,10 +213,10 @@ function populateFieldList() {
     dataSource.getUnderlyingDataAsync().then(columns => {
         let options = "";
         let t = 0;
-        console.log(columns);
+        //console.log(columns);
         for (f of columns.columns) {
             // if (f.dataType == pdatatype) {
-            console.log(f.dataType);
+            // console.log(f.dataType);
             options += "<option value='" + f.fieldName + "'>" + f.fieldName + "</option>";
             t++
             // }
