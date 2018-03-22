@@ -15,16 +15,12 @@
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 
     <script src="tableau-extensions-0.latest.js"></script>
-
-    <script src="index.js"></script>
-    <link rel="stylesheet" href="style.css">
+    <script src="dynamic.js"></script>
 </head>
 
 <body>
-    <div class="container-fluid" style="padding:0px;">
-        <form class="form-inline" id="dpcontainer">
-            <select class="form-control-sm" id="dynamicparameter" onChange="updateParam(this.value)"></select>
-        </form>
+    <div class="container-fluid" style="padding:0px 8px;">
+        <select class="form-control-sm" id="dynamicparameter" style="width:100%;" onChange="updateParam(this.value)"></select>
     </div>
 </body>
 

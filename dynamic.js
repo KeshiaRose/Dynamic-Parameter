@@ -16,7 +16,7 @@ $(document).ready(function() {
 
 // Pops open the configure page
 function configure() {
-    const popupUrl = 'https://keshiarose.github.io/Dynamic-Parameter/hosted/popup.html';
+    const popupUrl = `${window.location.origin}/Dynamic-Parameter/config.html`
     let payload = "";
     tableau.extensions.ui.displayDialogAsync(popupUrl, payload, { height: 600, width: 500 }).then((closePayload) => {
         console.log("Dialog was closed.");

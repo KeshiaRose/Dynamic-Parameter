@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Dynamic Parameter</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        html,
+        body {
+            margin: 0;
+            width: 100%;
+            height: 100%;
+            font-family: Helvetica, sans-serif;
+            display: flex;
+            align-items: stretch;
+            flex-direction: column;
+        }
+        
+        .header {
+            color: #fff;
+            background-color: #155899;
+            background: linear-gradient(to right, #155899, #159858);
+            height: 300px;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .hc {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            align-items: center;
+            align-content: center;
+            margin: 0px auto;
+            max-width: 800px;
+            height: 100%;
+        }
+        
+        .hc p,
+        .hc h1 {
+            width: 100%;
+        }
+        
+        .buttons {
+            display: flex;
+            justify-content: space-around;
+            width: 70%;
+            margin-top: 25px;
+        }
+        
+        .content {
+            flex: auto;
+            background-color: #f4f4f4;
+            width: 100%;
+        }
+        
+        .cc {
+            margin: 0px auto;
+            padding-top: 50px;
+            max-width: 800px;
+            height: 100%;
+        }
+        
+        .cc h2 {
+            border-bottom: #c5c5c5 1px solid;
+            color: #159858;
+        }
+        
+        a {
+            color: #155899;
+        }
+        
+        a:hover {
+            color: #155899;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <div class="hc">
+            <h1>Dynamic Parameter Extension</h1>
+            <p>A Tableau Extension to add dynamic parameter capabilities to Tableau dashboards.</p>
+            <div class="buttons">
+                <a href="https://github.com/KeshiaRose/Dynamic-Parameter" class="btn btn-light">View on GitHub</a>
+                <a href="https://keshiarose.github.io/Dynamic-Parameter/DynamicParameter.trex" class="btn btn-light">Download Manifest File</a>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="cc">
+            <h2>Dynamic Parameter Extension</h2>
+            <p>This extension allows you to add dynamic parameter capabilities to a Tableau dashboard.</p>
+
+            <h2>Installing the Extension</h2>
+
+            <p>Download and install the Extensions API version of Tableau Desktop from the <a href="https://prerelease.tableau.com">Tableau Extensions API Developer Preview</a> site. Under <strong>Resources</strong>, click <strong>Extensions API Software Downloads</strong>.</p>
+
+            <p>Current version: 18.0227.0818</p>
+
+
+            <p>Download the Dynamic Parameter <a href="https://keshiarose.github.io/Dynamic-Parameter/DynamicParameter.trex">manifest file</a>.</p>
+
+            <h2>Using the Extension</h2>
+            <ol>
+                <li>Create an open input (All) parameter with a data type matching the field you want to use to populate it</li>
+                <li>Drag in a new Extension object to your dashboard</li>
+                <li>Find the manifest (.trex) file you downloaded above</li>
+                <li>Select the parameter you created above for the extension to manipulate</li>
+                <li>Select the data source that holds the field you want to base your parameter on (if only one data source present, the extension will auto select it)</li>
+                <li>Select the field you want to base your parameter on</li>
+                <li>Optional: If you want your parameter to only contain relevant values, check the box and select the worksheet that has the filters you want to affect the dynamic parameter</li>
+                <li>Click ‘Add dynamic parameter’</li>
+            </ol>
+        </div>
+    </div>
+</body>
+
+</html>
