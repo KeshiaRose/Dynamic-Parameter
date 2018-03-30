@@ -5,7 +5,7 @@ This extension allows you to add dynamic parameter capabilities to a Tableau das
 
 Download and install the Extensions API version of Tableau Desktop from the [Tableau Extensions API Developer Preview](https://prerelease.tableau.com) site. Under **Resources**, click **Extensions API Software Downloads**. 
 
-Current version: 18.0227.0818
+Current version: 18.0322.2000
 
 Download the Dynamic Parameter [manifest file](https://keshiarose.github.io/Dynamic-Parameter/DynamicParameter.trex). 
 

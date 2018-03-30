@@ -18,7 +18,7 @@ $(document).ready(function() {
 function configure() {
     const popupUrl = `${window.location.origin}/Dynamic-Parameter/config.html`
     let payload = "";
-    tableau.extensions.ui.displayDialogAsync(popupUrl, payload, { height: 600, width: 500 }).then((closePayload) => {
+    tableau.extensions.ui.displayDialogAsync(popupUrl, payload, { height: 500, width: 600 }).then((closePayload) => {
         console.log("Dialog was closed.");
         console.log(closePayload);
         document.body.style.backgroundColor = tableau.extensions.settings.get('bg');
