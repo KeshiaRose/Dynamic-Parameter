@@ -4,7 +4,7 @@
     <default-locale>en_US</default-locale>
     <name resource-id="name"/>
     <description>Dynamic Parameter</description>
-    <author name="Keshia Rose" email="krose@tableau.com" organization="tableau" website="www.tableau.com"/>
+    <author name="Keshia Rose" email="krose@tableau.com" organization="tableau" website="https://www.tableau.com"/>
     <min-api-version>0.9</min-api-version>
     <source-location>
       <url>https://keshiarose.github.io/Dynamic-Parameter/dynamicparam.html</url>
