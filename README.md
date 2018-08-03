@@ -1,3 +1,5 @@
+>**The version found in this repository is out of date. Please go to the [Extension Gallery](https://extensiongallery.tableau.com/products/27) to get the latest version.**
+
 # Dynamic Parameter Extension
 This extension allows you to add dynamic parameter capabilities to a Tableau dashboard.
 
